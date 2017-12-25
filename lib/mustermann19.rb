@@ -69,7 +69,7 @@ module Mustermann19
     when Symbol  then self[:sinatra].new(input.inspect, options)
     else
       pattern = input.to_pattern(options.merge(:type => type)) if input.respond_to? :to_pattern
-      raise TypeError, "#{input.class} can't be coerced into Mustermann::Pattern" if pattern.nil?
+      raise TypeError, "#{input.class} can't be coerced into Mustermann19::Pattern" if pattern.nil?
       pattern
     end
   end

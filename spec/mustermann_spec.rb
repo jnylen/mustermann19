@@ -46,7 +46,7 @@ describe Mustermann19 do
 
     context "invalid arguments" do
       it "raise a TypeError for unsupported types" do
-        expect { Mustermann19.new(10) }.to raise_error(TypeError, "Fixnum can't be coerced into Mustermann19::Pattern")
+        expect { Mustermann19.new(10) }.to raise_error(TypeError, "Integer can't be coerced into Mustermann19::Pattern")
       end
     end
   end
