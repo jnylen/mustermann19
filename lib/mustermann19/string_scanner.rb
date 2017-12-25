@@ -1,4 +1,4 @@
-require 'musterman19'
+require 'mustermann19'
 require 'mustermann19/pattern_cache'
 require 'delegate'
 
