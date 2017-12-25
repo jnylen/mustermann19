@@ -1,20 +1,20 @@
 require 'support'
-require 'mustermann/extension'
+require 'mustermann19/extension'
 require 'sinatra/base'
 require 'rack/test'
 
-describe Mustermann::Extension do
+describe Mustermann19::Extension do
   include Rack::Test::Methods
 
   subject :app do
     Sinatra.new do
       set :environment, :test
-      register Mustermann
+      register Mustermann19
     end
   end
 
   it 'sets up the extension' do
-    app.should be_a(Mustermann::Extension)
+    app.should be_a(Mustermann19::Extension)
   end
 
   context 'uses Sinatra-style patterns by default' do

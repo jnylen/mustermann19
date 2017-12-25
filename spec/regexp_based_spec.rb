@@ -1,8 +1,8 @@
 require 'support'
-require 'mustermann/regexp_based'
+require 'mustermann19/regexp_based'
 
-describe Mustermann::RegexpBased do
+describe Mustermann19::RegexpBased do
   it 'raises a NotImplementedError when used directly' do
-    expect { Mustermann::RegexpBased.new("") === "" }.to raise_error(NotImplementedError)
+    expect { Mustermann19::RegexpBased.new("") === "" }.to raise_error(NotImplementedError)
   end
 end

@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 require 'support'
-require 'mustermann/shell'
+require 'mustermann19/shell'
 
-describe Mustermann::Shell do
+describe Mustermann19::Shell do
   extend Support::Pattern
 
   pattern '' do
@@ -109,11 +109,11 @@ describe Mustermann::Shell do
   end
 
   describe :=~ do
-    example { '/foo'.should be =~ Mustermann::Shell.new('/foo') }
+    example { '/foo'.should be =~ Mustermann19::Shell.new('/foo') }
   end
 
   context "peeking", :skip => true do
-    subject(:pattern) { Mustermann::Shell.new("foo*/") }
+    subject(:pattern) { Mustermann19::Shell.new("foo*/") }
 
     describe :peek_size do
       example { pattern.peek_size("foo bar/blah")   .should be == "foo bar/".size }
@@ -121,7 +121,7 @@ describe Mustermann::Shell do
       example { pattern.peek_size("/foo bar")       .should be_nil }
 
       context 'with just * as pattern' do
-        subject(:pattern) { Mustermann::Shell.new('*') }
+        subject(:pattern) { Mustermann19::Shell.new('*') }
         example { pattern.peek_size('foo')              .should be == 3 }
         example { pattern.peek_size('foo/bar')          .should be == 3 }
         example { pattern.peek_size('foo/bar/baz')      .should be == 3 }

@@ -1,7 +1,7 @@
 require 'support'
-require 'mustermann/pyramid'
+require 'mustermann19/pyramid'
 
-describe Mustermann::Pyramid do
+describe Mustermann19::Pyramid do
   extend Support::Pattern
 
   pattern '' do

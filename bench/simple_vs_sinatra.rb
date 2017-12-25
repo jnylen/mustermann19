@@ -1,10 +1,10 @@
 $:.unshift File.expand_path('../lib', File.dirname(__FILE__))
 
 require 'benchmark'
-require 'mustermann/simple'
-require 'mustermann/sinatra'
+require 'mustermann19/simple'
+require 'mustermann19/sinatra'
 
-[Mustermann::Simple, Mustermann::Sinatra].each do |klass|
+[Mustermann19::Simple, Mustermann19::Sinatra].each do |klass|
   puts "", " #{klass} ".center(64, '=')
   Benchmark.bmbm do |x|
     no_capture = klass.new("/simple")

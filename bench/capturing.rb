@@ -1,18 +1,18 @@
 $:.unshift File.expand_path('../lib', File.dirname(__FILE__))
 
 require 'benchmark'
-require 'mustermann'
-require 'mustermann/regexp_based'
+require 'mustermann19'
+require 'mustermann19/regexp_based'
 require 'addressable/template'
 
 
-Mustermann.register(:regexp, Class.new(Mustermann::RegexpBased) {
+Mustermann19.register(:regexp, Class.new(Mustermann19::RegexpBased) {
   def compile(**options)
     Regexp.new(@string)
   end
 }, load: false)
 
-Mustermann.register(:addressable, Class.new(Mustermann::RegexpBased) {
+Mustermann19.register(:addressable, Class.new(Mustermann19::RegexpBased) {
   def compile(**options)
     Addressable::Template.new(@string)
   end
@@ -39,14 +39,14 @@ GC.disable
 puts "Compilation:"
 Benchmark.bmbm do |x|
   list.each do |type, pattern|
-    x.report(type) { 1_000.times { Mustermann.new(pattern, type: type) } }
+    x.report(type) { 1_000.times { Mustermann19.new(pattern, type: type) } }
   end
 end
 
 puts "", "Matching with two captures (one splat, one normal):"
 Benchmark.bmbm do |x|
   list.each do |type, pattern|
-    pattern = Mustermann.new(pattern, type: type)
+    pattern = Mustermann19.new(pattern, type: type)
     x.report type do
       10_000.times do
         match = pattern.match(string)

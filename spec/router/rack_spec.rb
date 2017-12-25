@@ -1,8 +1,8 @@
-require 'mustermann/router/rack'
+require 'mustermann19/router/rack'
 
-describe Mustermann::Router::Rack do
+describe Mustermann19::Router::Rack do
   include Rack::Test::Methods
-  subject(:app) { Mustermann::Router::Rack.new }
+  subject(:app) { Mustermann19::Router::Rack.new }
 
   context 'matching' do
     before { app.on('/foo') { [418, {'Content-Type' => 'text/plain'}, 'bar'] } }

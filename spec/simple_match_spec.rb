@@ -1,8 +1,8 @@
 require 'support'
-require 'mustermann/simple_match'
+require 'mustermann19/simple_match'
 
-describe Mustermann::SimpleMatch do
-  subject { Mustermann::SimpleMatch.new('example') }
+describe Mustermann19::SimpleMatch do
+  subject { Mustermann19::SimpleMatch.new('example') }
   its(:to_s) { should be == 'example' }
   its(:names) { should be == [] }
   its(:captures) { should be == [] }

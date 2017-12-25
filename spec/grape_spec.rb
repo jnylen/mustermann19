@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 require 'support'
-require 'mustermann/grape'
+require 'mustermann19/grape'
 
-describe Mustermann::Grape do
+describe Mustermann19::Grape do
   extend Support::Pattern
 
   pattern '' do
@@ -628,103 +628,103 @@ describe Mustermann::Grape do
 
   context 'invalid syntax' do
     example 'unexpected closing parenthesis' do
-      expect { Mustermann::Grape.new('foo)bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected ) while parsing "foo)bar"')
+      expect { Mustermann19::Grape.new('foo)bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected ) while parsing "foo)bar"')
     end
 
     example 'missing closing parenthesis' do
-      expect { Mustermann::Grape.new('foo(bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "foo(bar"')
+      expect { Mustermann19::Grape.new('foo(bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "foo(bar"')
     end
 
     example 'missing unescaped closing parenthesis' do
-      expect { Mustermann::Grape.new('foo(bar\)') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "foo(bar\\\\)"')
+      expect { Mustermann19::Grape.new('foo(bar\)') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "foo(bar\\\\)"')
     end
 
     example '? at beginning of route' do
-      expect { Mustermann::Grape.new('?foobar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected ? while parsing "?foobar"')
+      expect { Mustermann19::Grape.new('?foobar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected ? while parsing "?foobar"')
     end
 
     example 'double ?' do
-      expect { Mustermann::Grape.new('foo??bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected ? while parsing "foo??bar"')
+      expect { Mustermann19::Grape.new('foo??bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected ? while parsing "foo??bar"')
     end
 
     example 'dangling escape' do
-      expect { Mustermann::Grape.new('foo\\') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "foo\\\\"')
+      expect { Mustermann19::Grape.new('foo\\') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "foo\\\\"')
     end
   end
 
   context 'invalid capture names' do
     example 'empty name' do
-      expect { Mustermann::Grape.new('/:/') }.
-        to raise_error(Mustermann::CompileError, "capture name can't be empty: \"/:/\"")
+      expect { Mustermann19::Grape.new('/:/') }.
+        to raise_error(Mustermann19::CompileError, "capture name can't be empty: \"/:/\"")
     end
 
     example 'named splat' do
-      expect { Mustermann::Grape.new('/:splat/') }.
-        to raise_error(Mustermann::CompileError, "capture name can't be splat: \"/:splat/\"")
+      expect { Mustermann19::Grape.new('/:splat/') }.
+        to raise_error(Mustermann19::CompileError, "capture name can't be splat: \"/:splat/\"")
     end
 
     example 'named captures' do
-      expect { Mustermann::Grape.new('/:captures/') }.
-        to raise_error(Mustermann::CompileError, "capture name can't be captures: \"/:captures/\"")
+      expect { Mustermann19::Grape.new('/:captures/') }.
+        to raise_error(Mustermann19::CompileError, "capture name can't be captures: \"/:captures/\"")
     end
 
     example 'with capital letter' do
-      expect { Mustermann::Grape.new('/:Foo/') }.
-        to raise_error(Mustermann::CompileError, "capture name must start with underscore or lower case letter: \"/:Foo/\"")
+      expect { Mustermann19::Grape.new('/:Foo/') }.
+        to raise_error(Mustermann19::CompileError, "capture name must start with underscore or lower case letter: \"/:Foo/\"")
     end
 
     example 'with integer' do
-      expect { Mustermann::Grape.new('/:1a/') }.
-        to raise_error(Mustermann::CompileError, "capture name must start with underscore or lower case letter: \"/:1a/\"")
+      expect { Mustermann19::Grape.new('/:1a/') }.
+        to raise_error(Mustermann19::CompileError, "capture name must start with underscore or lower case letter: \"/:1a/\"")
     end
 
     example 'same name twice' do
-      expect { Mustermann::Grape.new('/:foo(/:bar)?/:bar?') }.
-        to raise_error(Mustermann::CompileError, "can't use the same capture name twice: \"/:foo(/:bar)?/:bar?\"")
+      expect { Mustermann19::Grape.new('/:foo(/:bar)?/:bar?') }.
+        to raise_error(Mustermann19::CompileError, "can't use the same capture name twice: \"/:foo(/:bar)?/:bar?\"")
     end
   end
 
   context 'Regexp compatibility' do
     describe :=== do
-      example('non-matching') { Mustermann::Grape.new("/")     .should_not be === '/foo' }
-      example('matching')     { Mustermann::Grape.new("/:foo") .should     be === '/foo' }
+      example('non-matching') { Mustermann19::Grape.new("/")     .should_not be === '/foo' }
+      example('matching')     { Mustermann19::Grape.new("/:foo") .should     be === '/foo' }
     end
 
     describe :=~ do
-      example('non-matching') { Mustermann::Grape.new("/")     .should_not be =~ '/foo' }
-      example('matching')     { Mustermann::Grape.new("/:foo") .should     be =~ '/foo' }
+      example('non-matching') { Mustermann19::Grape.new("/")     .should_not be =~ '/foo' }
+      example('matching')     { Mustermann19::Grape.new("/:foo") .should     be =~ '/foo' }
 
       context 'String#=~' do
-        example('non-matching') { "/foo".should_not be =~ Mustermann::Grape.new("/") }
-        example('matching')     { "/foo".should     be =~ Mustermann::Grape.new("/:foo") }
+        example('non-matching') { "/foo".should_not be =~ Mustermann19::Grape.new("/") }
+        example('matching')     { "/foo".should     be =~ Mustermann19::Grape.new("/:foo") }
       end
     end
 
     describe :to_regexp do
-      example('empty pattern') { Mustermann::Grape.new('').to_regexp.should be == /\A(?-mix:)\Z/ }
+      example('empty pattern') { Mustermann19::Grape.new('').to_regexp.should be == /\A(?-mix:)\Z/ }
 
       context 'Regexp.try_convert' do
-        example('empty pattern') { Regexp.try_convert(Mustermann::Grape.new('')).should be == /\A(?-mix:)\Z/ }
+        example('empty pattern') { Regexp.try_convert(Mustermann19::Grape.new('')).should be == /\A(?-mix:)\Z/ }
       end
     end
   end
 
   context 'Proc compatibility' do
     describe :to_proc do
-      example { Mustermann::Grape.new("/").to_proc.should be_a(Proc) }
-      example('non-matching') { Mustermann::Grape.new("/")     .to_proc.call('/foo').should be == false }
-      example('matching')     { Mustermann::Grape.new("/:foo") .to_proc.call('/foo').should be == true  }
+      example { Mustermann19::Grape.new("/").to_proc.should be_a(Proc) }
+      example('non-matching') { Mustermann19::Grape.new("/")     .to_proc.call('/foo').should be == false }
+      example('matching')     { Mustermann19::Grape.new("/:foo") .to_proc.call('/foo').should be == true  }
     end
   end
 
   context "peeking" do
-    subject(:pattern) { Mustermann::Grape.new(":name") }
+    subject(:pattern) { Mustermann19::Grape.new(":name") }
 
     describe :peek_size do
       example { pattern.peek_size("foo bar/blah")   .should be == "foo bar".size }

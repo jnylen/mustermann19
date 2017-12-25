@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 require 'support'
-require 'mustermann/template'
+require 'mustermann19/template'
 
-describe Mustermann::Template do
+describe Mustermann19::Template do
   extend Support::Pattern
 
   pattern '' do
@@ -811,18 +811,18 @@ describe Mustermann::Template do
 
   context 'invalid syntax' do
     example 'unexpected closing bracket' do
-      expect { Mustermann::Template.new('foo}bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected } while parsing "foo}bar"')
+      expect { Mustermann19::Template.new('foo}bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected } while parsing "foo}bar"')
     end
 
     example 'missing closing bracket' do
-      expect { Mustermann::Template.new('foo{bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "foo{bar"')
+      expect { Mustermann19::Template.new('foo{bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "foo{bar"')
     end
   end
 
   context "peeking" do
-    subject(:pattern) { Mustermann::Template.new("{name}bar") }
+    subject(:pattern) { Mustermann19::Template.new("{name}bar") }
 
     describe :peek_size do
       example { pattern.peek_size("foo%20bar/blah") .should be == "foo%20bar".size }

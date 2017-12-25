@@ -21,7 +21,7 @@ RSpec::Matchers.define :match do |expected|
 
       if ast = actual.instance_variable_get(:@ast)
         require 'mustermann/ast/tree_renderer'
-        tree = Mustermann::AST::TreeRenderer.render(ast)
+        tree = Mustermann19::AST::TreeRenderer.render(ast)
         message << "\n\nAST:\n#{tree}"
       end
 

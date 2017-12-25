@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 require 'support'
-require 'mustermann/identity'
+require 'mustermann19/identity'
 
-describe Mustermann::Identity do
+describe Mustermann19::Identity do
   extend Support::Pattern
 
   pattern '' do
@@ -21,7 +21,7 @@ describe Mustermann::Identity do
     it { should_not expand(a: 10)                      }
 
     example do
-      pattern.match('').inspect.should be == '#<Mustermann::SimpleMatch "">'
+      pattern.match('').inspect.should be == '#<Mustermann19::SimpleMatch "">'
     end
   end
 
@@ -104,7 +104,7 @@ describe Mustermann::Identity do
   end
 
   context "peeking" do
-    subject(:pattern) { Mustermann::Identity.new("foo bar") }
+    subject(:pattern) { Mustermann19::Identity.new("foo bar") }
 
     describe :peek_size do
       example { pattern.peek_size("foo bar blah")   .should be == "foo bar".size }

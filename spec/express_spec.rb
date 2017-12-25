@@ -1,7 +1,7 @@
 require 'support'
-require 'mustermann/express'
+require 'mustermann19/express'
 
-describe Mustermann::Express do
+describe Mustermann19::Express do
   extend Support::Pattern
 
   pattern '' do
@@ -187,23 +187,23 @@ describe Mustermann::Express do
 
   context 'invalid syntax' do
     example 'unexpected closing parenthesis' do
-      expect { Mustermann::Express.new('foo)bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected ) while parsing "foo)bar"')
+      expect { Mustermann19::Express.new('foo)bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected ) while parsing "foo)bar"')
     end
 
     example 'missing closing parenthesis' do
-      expect { Mustermann::Express.new('foo(bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "foo(bar"')
+      expect { Mustermann19::Express.new('foo(bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "foo(bar"')
     end
 
     example 'unexpected ?' do
-      expect { Mustermann::Express.new('foo?bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected ? while parsing "foo?bar"')
+      expect { Mustermann19::Express.new('foo?bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected ? while parsing "foo?bar"')
     end
 
     example 'unexpected *' do
-      expect { Mustermann::Express.new('foo*bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected * while parsing "foo*bar"')
+      expect { Mustermann19::Express.new('foo*bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected * while parsing "foo*bar"')
     end
   end
 end

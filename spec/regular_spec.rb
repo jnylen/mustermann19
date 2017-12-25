@@ -1,7 +1,7 @@
 require 'support'
-require 'mustermann/regular'
+require 'mustermann19/regular'
 
-describe Mustermann::Regular do
+describe Mustermann19::Regular do
   extend Support::Pattern
 
   pattern '' do
@@ -38,7 +38,7 @@ describe Mustermann::Regular do
   end
 
   context "peeking" do
-    subject(:pattern) { Mustermann::Regular.new("(?<name>[^/]+)") }
+    subject(:pattern) { Mustermann19::Regular.new("(?<name>[^/]+)") }
 
     describe :peek_size do
       example { pattern.peek_size("foo bar/blah")   .should be == "foo bar".size }

@@ -1,7 +1,7 @@
 require 'support'
-require 'mustermann/flask'
+require 'mustermann19/flask'
 
-describe Mustermann::Flask do
+describe Mustermann19::Flask do
   extend Support::Pattern
 
   pattern '' do
@@ -329,33 +329,33 @@ describe Mustermann::Flask do
 
   context 'invalid syntax' do
     example 'unexpected end of capture' do
-      expect { Mustermann::Flask.new('foo>bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected > while parsing "foo>bar"')
+      expect { Mustermann19::Flask.new('foo>bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected > while parsing "foo>bar"')
     end
 
     example 'missing end of capture' do
-      expect { Mustermann::Flask.new('foo<bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "foo<bar"')
+      expect { Mustermann19::Flask.new('foo<bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "foo<bar"')
     end
 
     example 'unknown converter' do
-      expect { Mustermann::Flask.new('foo<bar:name>') }.
-        to raise_error(Mustermann::ParseError, 'unexpected converter "bar" while parsing "foo<bar:name>"')
+      expect { Mustermann19::Flask.new('foo<bar:name>') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected converter "bar" while parsing "foo<bar:name>"')
     end
 
     example 'broken argument synax' do
-      expect { Mustermann::Flask.new('<string(length=3=2):foo>') }.
-        to raise_error(Mustermann::ParseError, 'unexpected = while parsing "<string(length=3=2):foo>"')
+      expect { Mustermann19::Flask.new('<string(length=3=2):foo>') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected = while parsing "<string(length=3=2):foo>"')
     end
 
     example 'missing )' do
-      expect { Mustermann::Flask.new('<string(foo') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "<string(foo"')
+      expect { Mustermann19::Flask.new('<string(foo') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "<string(foo"')
     end
 
     example 'missing ""' do
-      expect { Mustermann::Flask.new('<string("foo') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "<string(\\"foo"')
+      expect { Mustermann19::Flask.new('<string("foo') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "<string(\\"foo"')
     end
   end
 end

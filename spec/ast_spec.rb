@@ -1,14 +1,14 @@
 require 'support'
-require 'mustermann/ast/node'
+require 'mustermann19/ast/node'
 
-describe Mustermann::AST do
+describe Mustermann19::AST do
   describe :type do
-    example { Mustermann::AST::Node[:char].type     .should be == :char }
-    example { Mustermann::AST::Node[:char].new.type .should be == :char }
+    example { Mustermann19::AST::Node[:char].type     .should be == :char }
+    example { Mustermann19::AST::Node[:char].new.type .should be == :char }
   end
 
   describe :min_size do
-    example { Mustermann::AST::Node[:char].new.min_size.should be == 1 }
-    example { Mustermann::AST::Node[:node].new.min_size.should be == 0 }
+    example { Mustermann19::AST::Node[:char].new.min_size.should be == 1 }
+    example { Mustermann19::AST::Node[:node].new.min_size.should be == 0 }
   end
 end

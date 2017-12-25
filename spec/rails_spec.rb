@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 require 'support'
-require 'mustermann/rails'
+require 'mustermann19/rails'
 
-describe Mustermann::Rails do
+describe Mustermann19::Rails do
   extend Support::Pattern
 
   pattern '' do
@@ -497,83 +497,83 @@ describe Mustermann::Rails do
 
   context 'invalid syntax' do
     example 'unexpected closing parenthesis' do
-      expect { Mustermann::Rails.new('foo)bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected ) while parsing "foo)bar"')
+      expect { Mustermann19::Rails.new('foo)bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected ) while parsing "foo)bar"')
     end
 
     example 'missing closing parenthesis' do
-      expect { Mustermann::Rails.new('foo(bar') }.
-        to raise_error(Mustermann::ParseError, 'unexpected end of string while parsing "foo(bar"')
+      expect { Mustermann19::Rails.new('foo(bar') }.
+        to raise_error(Mustermann19::ParseError, 'unexpected end of string while parsing "foo(bar"')
     end
   end
 
   context 'invalid capture names' do
     example 'empty name' do
-      expect { Mustermann::Rails.new('/:/') }.
-        to raise_error(Mustermann::CompileError, "capture name can't be empty: \"/:/\"")
+      expect { Mustermann19::Rails.new('/:/') }.
+        to raise_error(Mustermann19::CompileError, "capture name can't be empty: \"/:/\"")
     end
 
     example 'named splat' do
-      expect { Mustermann::Rails.new('/:splat/') }.
-        to raise_error(Mustermann::CompileError, "capture name can't be splat: \"/:splat/\"")
+      expect { Mustermann19::Rails.new('/:splat/') }.
+        to raise_error(Mustermann19::CompileError, "capture name can't be splat: \"/:splat/\"")
     end
 
     example 'named captures' do
-      expect { Mustermann::Rails.new('/:captures/') }.
-        to raise_error(Mustermann::CompileError, "capture name can't be captures: \"/:captures/\"")
+      expect { Mustermann19::Rails.new('/:captures/') }.
+        to raise_error(Mustermann19::CompileError, "capture name can't be captures: \"/:captures/\"")
     end
 
     example 'with capital letter' do
-      expect { Mustermann::Rails.new('/:Foo/') }.
-        to raise_error(Mustermann::CompileError, "capture name must start with underscore or lower case letter: \"/:Foo/\"")
+      expect { Mustermann19::Rails.new('/:Foo/') }.
+        to raise_error(Mustermann19::CompileError, "capture name must start with underscore or lower case letter: \"/:Foo/\"")
     end
 
     example 'with integer' do
-      expect { Mustermann::Rails.new('/:1a/') }.
-        to raise_error(Mustermann::CompileError, "capture name must start with underscore or lower case letter: \"/:1a/\"")
+      expect { Mustermann19::Rails.new('/:1a/') }.
+        to raise_error(Mustermann19::CompileError, "capture name must start with underscore or lower case letter: \"/:1a/\"")
     end
 
     example 'same name twice' do
-      expect { Mustermann::Rails.new('/:foo(/:bar)/:bar') }.
-        to raise_error(Mustermann::CompileError, "can't use the same capture name twice: \"/:foo(/:bar)/:bar\"")
+      expect { Mustermann19::Rails.new('/:foo(/:bar)/:bar') }.
+        to raise_error(Mustermann19::CompileError, "can't use the same capture name twice: \"/:foo(/:bar)/:bar\"")
     end
   end
 
   context 'Regexp compatibility' do
     describe :=== do
-      example('non-matching') { Mustermann::Rails.new("/")     .should_not be === '/foo' }
-      example('matching')     { Mustermann::Rails.new("/:foo") .should     be === '/foo' }
+      example('non-matching') { Mustermann19::Rails.new("/")     .should_not be === '/foo' }
+      example('matching')     { Mustermann19::Rails.new("/:foo") .should     be === '/foo' }
     end
 
     describe :=~ do
-      example('non-matching') { Mustermann::Rails.new("/")     .should_not be =~ '/foo' }
-      example('matching')     { Mustermann::Rails.new("/:foo") .should     be =~ '/foo' }
+      example('non-matching') { Mustermann19::Rails.new("/")     .should_not be =~ '/foo' }
+      example('matching')     { Mustermann19::Rails.new("/:foo") .should     be =~ '/foo' }
 
       context 'String#=~' do
-        example('non-matching') { "/foo".should_not be =~ Mustermann::Rails.new("/") }
-        example('matching')     { "/foo".should     be =~ Mustermann::Rails.new("/:foo") }
+        example('non-matching') { "/foo".should_not be =~ Mustermann19::Rails.new("/") }
+        example('matching')     { "/foo".should     be =~ Mustermann19::Rails.new("/:foo") }
       end
     end
 
     describe :to_regexp do
-      example('empty pattern') { Mustermann::Rails.new('').to_regexp.should be == /\A(?-mix:)\Z/ }
+      example('empty pattern') { Mustermann19::Rails.new('').to_regexp.should be == /\A(?-mix:)\Z/ }
 
       context 'Regexp.try_convert' do
-        example('empty pattern') { Regexp.try_convert(Mustermann::Rails.new('')).should be == /\A(?-mix:)\Z/ }
+        example('empty pattern') { Regexp.try_convert(Mustermann19::Rails.new('')).should be == /\A(?-mix:)\Z/ }
       end
     end
   end
 
   context 'Proc compatibility' do
     describe :to_proc do
-      example { Mustermann::Rails.new("/").to_proc.should be_a(Proc) }
-      example('non-matching') { Mustermann::Rails.new("/")     .to_proc.call('/foo').should be == false }
-      example('matching')     { Mustermann::Rails.new("/:foo") .to_proc.call('/foo').should be == true  }
+      example { Mustermann19::Rails.new("/").to_proc.should be_a(Proc) }
+      example('non-matching') { Mustermann19::Rails.new("/")     .to_proc.call('/foo').should be == false }
+      example('matching')     { Mustermann19::Rails.new("/:foo") .to_proc.call('/foo').should be == true  }
     end
   end
 
   context "peeking" do
-    subject(:pattern) { Mustermann::Rails.new(":name") }
+    subject(:pattern) { Mustermann19::Rails.new(":name") }
 
     describe :peek_size do
       example { pattern.peek_size("foo bar/blah")   .should be == "foo bar".size }

@@ -1,10 +1,10 @@
 require 'support'
-require 'mustermann/string_scanner'
+require 'mustermann19/string_scanner'
 
-describe Mustermann::StringScanner do
+describe Mustermann19::StringScanner do
   include Support::ScanMatcher
 
-  subject(:scanner) { Mustermann::StringScanner.new(example_string) }
+  subject(:scanner) { Mustermann19::StringScanner.new(example_string) }
   let(:example_string) { "foo bar" }
 
   describe :scan do
@@ -172,10 +172,10 @@ describe Mustermann::StringScanner do
   end
 
   describe :inspect do
-    example { scanner.inspect.should be == '#<Mustermann::StringScanner 0/7 @ "foo bar">' }
+    example { scanner.inspect.should be == '#<Mustermann19::StringScanner 0/7 @ "foo bar">' }
     example do
       scanner.position = 4
-      scanner.inspect.should be == '#<Mustermann::StringScanner 4/7 @ "foo bar">'
+      scanner.inspect.should be == '#<Mustermann19::StringScanner 4/7 @ "foo bar">'
     end
   end
 
@@ -239,7 +239,7 @@ describe Mustermann::StringScanner do
     end
 
     example do
-      expect { scanner.unscan }.to raise_error(Mustermann::StringScanner::ScanError,
+      expect { scanner.unscan }.to raise_error(Mustermann19::StringScanner::ScanError,
         'unscan failed: previous match record not exist')
     end
   end
@@ -264,8 +264,8 @@ describe Mustermann::StringScanner do
   describe :clear_cache do
     example do
       scanner.scan("foo")
-      Mustermann::StringScanner.clear_cache
-      Mustermann::StringScanner.cache_size.should be == 0
+      Mustermann19::StringScanner.clear_cache
+      Mustermann19::StringScanner.cache_size.should be == 0
     end
   end
 end

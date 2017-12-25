@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 require 'support'
-require 'mustermann/simple'
+require 'mustermann19/simple'
 
-describe Mustermann::Simple do
+describe Mustermann19::Simple do
   extend Support::Pattern
 
   pattern '' do
@@ -228,18 +228,18 @@ describe Mustermann::Simple do
 
   context 'error handling' do
     example '? at beginning of route' do
-      expect { Mustermann::Simple.new('?foobar') }.
-        to raise_error(Mustermann::ParseError)
+      expect { Mustermann19::Simple.new('?foobar') }.
+        to raise_error(Mustermann19::ParseError)
     end
 
     example 'invalid capture name' do
-      expect { Mustermann::Simple.new('/:1a/') }.
-        to raise_error(Mustermann::CompileError)
+      expect { Mustermann19::Simple.new('/:1a/') }.
+        to raise_error(Mustermann19::CompileError)
     end
   end
 
   context "peeking" do
-    subject(:pattern) { Mustermann::Simple.new(":name") }
+    subject(:pattern) { Mustermann19::Simple.new(":name") }
 
     describe :peek_size do
       example { pattern.peek_size("foo bar/blah")   .should be == "foo bar".size }
